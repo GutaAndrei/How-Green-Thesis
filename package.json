@@ -1,0 +1,22 @@
+{
+  "name": "how-green-thesis",
+  "version": "1.0.0",
+  "description": "How Green Web App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GutaAndrei/How-Green-Thesis.git"
+  },
+  "author": "Guta Andrei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GutaAndrei/How-Green-Thesis/issues"
+  },
+  "homepage": "https://github.com/GutaAndrei/How-Green-Thesis#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
