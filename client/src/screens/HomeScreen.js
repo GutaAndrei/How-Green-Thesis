@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Device from "../components/Device";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 import { Row, Col } from "react-bootstrap";
 import { listDevices } from "../actions/deviceActions";
 
@@ -18,9 +20,9 @@ const HomeScreen = () => {
     <>
       <h1>Your Devices</h1>
       {loading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : error ? (
-        <h3>{error}</h3>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {devices.map((device) => (
