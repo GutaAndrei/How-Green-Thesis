@@ -1,29 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Device from "../components/Device";
 import { Row, Col } from "react-bootstrap";
-import axios from "axios";
+import { listDevices } from "../actions/deviceActions";
 
 const HomeScreen = () => {
-  const [devices, setDevices] = useState([]);
+  const dispatch = useDispatch();
+
+  const deviceList = useSelector((state) => state.deviceList);
+  const { loading, error, devices } = deviceList;
 
   useEffect(() => {
-    const fetchDevices = async () => {
-      const { data } = await axios.get("/api/devices");
-      setDevices(data);
-    };
+    dispatch(listDevices());
+  }, [dispatch]);
 
-    fetchDevices();
-  }, []);
   return (
     <>
       <h1>Your Devices</h1>
-      <Row>
-        {devices.map((device) => (
-          <Col key={device._id} sm={14} md={7} lg={5} xl={3}>
-            <Device device={device} />
-          </Col>
-        ))}
-      </Row>
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : error ? (
+        <h3>{error}</h3>
+      ) : (
+        <Row>
+          {devices.map((device) => (
+            <Col key={device._id} sm={14} md={7} lg={5} xl={3}>
+              <Device device={device} />
+            </Col>
+          ))}
+        </Row>
+      )}
     </>
   );
 };

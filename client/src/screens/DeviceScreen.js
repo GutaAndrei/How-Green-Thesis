@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import devices from "../devices";
+import axios from "axios";
 
 const DeviceScreen = ({ match }) => {
-  const device = devices.find((p) => p._id === match.params.id);
+  const [device, setDevice] = useState([]);
+  useEffect(() => {
+    const fetchDevice = async () => {
+      const { data } = await axios.get(`/api/devices/${match.params.id}`);
+      setDevice(data);
+    };
+
+    fetchDevice();
+  }, [match]);
   return (
     <Container className="vh-100">
       <Card className="m-4 p-2">
