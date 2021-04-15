@@ -14,7 +14,7 @@ const Header = () => {
                 <i className="fas fa-laptop-house"></i> Devices
               </Nav.Link>
               <Nav.Link href="/activity">
-                <i className="fas fa-calendar-alt"></i> Activity
+                <i class="far fa-calendar-alt"></i> Activity
               </Nav.Link>
               <Nav.Link href="/profile">
                 <i className="fas fa-user" /> Profile
