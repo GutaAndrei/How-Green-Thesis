@@ -10,10 +10,10 @@ const Device = ({ device }) => {
         <Card.Title as="h2">
           <strong>{device.name}</strong>
         </Card.Title>
-        <Card.Text as="h6">
+        <Card.Text as="h5">
           <i className="fas fa-bolt"></i> Wattage: {device.watts}W
         </Card.Text>
-        <Card.Text as="h6">
+        <Card.Text as="h5">
           <i className="far fa-clock"></i> Hours of use: {device.hours}H
         </Card.Text>
         <Row style={{ justifyContent: "space-between" }}>

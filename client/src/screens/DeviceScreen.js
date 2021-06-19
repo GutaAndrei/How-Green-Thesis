@@ -43,6 +43,16 @@ const DeviceScreen = ({ match }) => {
                   placeholder={device.watts}
                 />
               </Form.Group>
+              <Form.Group controlId="formHours">
+                <Form.Label as="h3">
+                  <i className="fas fa-bolt"></i> Hours of use
+                </Form.Label>
+                <Form.Control
+                  autoComplete="off"
+                  type="text"
+                  placeholder={device.hours}
+                />
+              </Form.Group>
               <Button variant="primary" type="submit">
                 <i className="fas fa-check"></i> Submit
               </Button>

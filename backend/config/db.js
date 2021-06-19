@@ -4,7 +4,7 @@ const connectDB = async () => {
   try {
     //console.log(process.env.MONGO_URI); undefined
     const conn = await mongoose.connect(
-      "mongodb+srv://Andrei_Guta:test1234@how-green-thesis.wjqmn.mongodb.net/test",
+      "mongodb+srv://Andrei_Guta:test1234@how-green-thesis.wjqmn.mongodb.net/HowGreen",
       {
         useUnifiedTopology: true,
         useNewUrlParser: true,

@@ -16,6 +16,11 @@ const deviceSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    hours: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,

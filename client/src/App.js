@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import DeviceScreen from "./screens/DeviceScreen";
+import ActivityScreen from "./screens/ActivityScreen";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Container>
           <Route path="/" component={HomeScreen} exact />
           <Route path="/device/:id" component={DeviceScreen} />
+          <Route path="/activity" component={ActivityScreen} />
         </Container>
       </main>
       <Footer />

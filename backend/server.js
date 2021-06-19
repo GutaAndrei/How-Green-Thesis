@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
 import deviceRoutes from "./routes/deviceRoutes.js";
+import dateRoutes from "./routes/dateRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/devices", deviceRoutes);
+app.use("/api/dates", dateRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

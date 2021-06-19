@@ -3,9 +3,10 @@ import dotenv from "dotenv";
 import colors from "colors";
 import users from "./data/users.js";
 import devices from "./data/devices.js";
+import dates from "./data/dates.js";
 import User from "./models/userModel.js";
 import Device from "./models/deviceModel.js";
-import UsedDevice from "./models/usedDeviceModel.js";
+import DeviceDate from "./models/dateModel.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
@@ -14,9 +15,9 @@ connectDB;
 
 const importData = async () => {
   try {
-    await UsedDevice.deleteMany();
     await Device.deleteMany();
     await User.deleteMany();
+    await DeviceDate.deleteMany();
 
     const createdUsers = await User.insertMany(users);
 
@@ -26,7 +27,12 @@ const importData = async () => {
       return { ...device, user: adminUser };
     });
 
+    const sampleDates = dates.map((date) => {
+      return { ...date, user: adminUser };
+    });
+
     await Device.insertMany(sampleDevices);
+    await DeviceDate.insertMany(sampleDates);
 
     console.log("Data Imported!".green.inverse);
     process.exit();
@@ -38,9 +44,9 @@ const importData = async () => {
 
 const destroyData = async () => {
   try {
-    await UsedDevice.deleteMany();
     await Device.deleteMany();
     await User.deleteMany();
+    await DeviceDate.deleteMany();
 
     console.log("Data Destroyed!".red.inverse);
     process.exit();

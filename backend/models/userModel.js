@@ -27,6 +27,13 @@ const userSchema = mongoose.Schema(
         ref: "Device",
       },
     ],
+    calendar: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: "DeviceDate",
+      },
+    ],
   },
   {
     timestamps: true,
