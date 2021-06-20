@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Device from "../components/Device";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { Row, Col } from "react-bootstrap";
+import AddDevice from "../components/AddDevice";
+import { Row, Col, Button } from "react-bootstrap";
 import { listDevices } from "../actions/deviceActions";
 
 const HomeScreen = () => {
@@ -19,6 +20,9 @@ const HomeScreen = () => {
   return (
     <>
       <h1>Your Devices</h1>
+      <Button href={``} variant="warning">
+        Add device
+      </Button>
       {loading ? (
         <Loader />
       ) : error ? (

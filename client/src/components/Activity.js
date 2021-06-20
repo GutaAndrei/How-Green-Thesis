@@ -32,6 +32,14 @@ const Activity = ({ date }) => {
         <Card.Text as="h5">
           You have consumed {wattSum}W Today, costing {electrCost}$
         </Card.Text>
+        <Row style={{ justifyContent: "space-between" }}>
+          <Button href="#" variant="info">
+            <i className="fas fa-edit"></i> Edit
+          </Button>
+          <Button variant="danger">
+            <i className="far fa-trash-alt"></i> Delete
+          </Button>
+        </Row>
       </Card.Body>
     </Card>
   );

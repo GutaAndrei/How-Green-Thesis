@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listDates } from "../actions/dateActions";
+import AddActivity from "../components/AddActivity";
 import Activity from "../components/Activity";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -29,7 +30,9 @@ const ActivityScreen = () => {
           You already have an entry for today
         </Button>
       ) : (
-        <Button variant="warning">Add devices for today</Button>
+        <Button href={`/activity/add`} variant="warning">
+          Add devices for today
+        </Button>
       )}
 
       <Container className="vh-100">

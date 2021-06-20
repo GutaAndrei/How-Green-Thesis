@@ -6,12 +6,14 @@ import {
   deviceDetailsReducer,
 } from "./reducers/deviceReducers";
 import { dateListReducer, dateDetailsReducer } from "./reducers/dateReducers";
+import { activityReducer } from "./reducers/activityReducers";
 
 const reducer = combineReducers({
   deviceList: deviceListReducer,
   deviceDetails: deviceDetailsReducer,
   dateList: dateListReducer,
   dateDetails: dateDetailsReducer,
+  activity: activityReducer,
 });
 
 const initialState = {};

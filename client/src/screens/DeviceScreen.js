@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Form, Button, Card, Container } from "react-bootstrap";
+import { Row, Button, Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listDeviceDetails } from "../actions/deviceActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
-const DeviceScreen = ({ match }) => {
+const DeviceScreen = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const deviceDetails = useSelector((state) => state.deviceDetails);
@@ -15,6 +15,10 @@ const DeviceScreen = ({ match }) => {
     dispatch(listDeviceDetails(match.params.id));
   }, [dispatch, match]);
 
+  const addToActivity = () => {
+    history.push(`/activity/${match.params.id}`);
+  };
+
   return (
     <Container className="vh-100">
       {loading ? (
@@ -22,41 +26,38 @@ const DeviceScreen = ({ match }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Card className="m-4 p-2">
+        <Card className="my-3 p-2">
           <Card.Body>
-            <Form>
-              <Form.Group controlId="formDeviceName">
-                <Form.Label as="h3">Device Name</Form.Label>
-                <Form.Control
-                  autoComplete="off"
-                  type="text"
-                  placeholder={device.name}
-                />
-              </Form.Group>
-              <Form.Group controlId="formWattage">
-                <Form.Label as="h3">
-                  <i className="fas fa-bolt"></i> Watts
-                </Form.Label>
-                <Form.Control
-                  autoComplete="off"
-                  type="text"
-                  placeholder={device.watts}
-                />
-              </Form.Group>
-              <Form.Group controlId="formHours">
-                <Form.Label as="h3">
-                  <i className="fas fa-bolt"></i> Hours of use
-                </Form.Label>
-                <Form.Control
-                  autoComplete="off"
-                  type="text"
-                  placeholder={device.hours}
-                />
-              </Form.Group>
-              <Button variant="primary" type="submit">
-                <i className="fas fa-check"></i> Submit
+            <Card.Title as="h1">{device.name}</Card.Title>
+            <Card.Text as="h3">Watts: {device.watts}</Card.Text>
+            <Card.Text as="h3">Hours of use: {device.hours}</Card.Text>
+            <Row style={{ justifyContent: "space-between" }}>
+              <Button
+                style={{ maxWidth: "300px" }}
+                type="button"
+                className="btn-block"
+                variant="info"
+              >
+                Edit
               </Button>
-            </Form>
+              <Button
+                style={{ maxWidth: "300px" }}
+                type="button"
+                className="btn-block"
+                onClick={addToActivity}
+                variant="success"
+              >
+                Add for today
+              </Button>
+              <Button
+                style={{ maxWidth: "300px" }}
+                type="button"
+                className="btn-block"
+                variant="danger"
+              >
+                Delete
+              </Button>
+            </Row>
           </Card.Body>
         </Card>
       )}

@@ -5,6 +5,8 @@ import {
   DATE_DETAILS_REQUEST,
   DATE_DETAILS_SUCCESS,
   DATE_DETAILS_FAIL,
+  DATE_ADD_DEVICE,
+  DATE_REMOVE_DEVICE,
 } from "../constants/dateConstants";
 
 export const dateListReducer = (state = { dates: [] }, action) => {

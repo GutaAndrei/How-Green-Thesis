@@ -16,14 +16,9 @@ const Device = ({ device }) => {
         <Card.Text as="h5">
           <i className="far fa-clock"></i> Hours of use: {device.hours}H
         </Card.Text>
-        <Row style={{ justifyContent: "space-between" }}>
-          <Button href={`/device/${device._id}`} variant="info">
-            <i className="fas fa-edit"></i> Edit
-          </Button>
-          <Button variant="danger">
-            <i className="far fa-trash-alt"></i> Delete
-          </Button>
-        </Row>
+        <Button href={`/device/${device._id}`}>
+          <i className="fas fa-edit"></i> View
+        </Button>
       </Card.Body>
     </Card>
   );
