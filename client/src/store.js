@@ -7,6 +7,12 @@ import {
 } from "./reducers/deviceReducers";
 import { dateListReducer, dateDetailsReducer } from "./reducers/dateReducers";
 import { activityReducer } from "./reducers/activityReducers";
+import {
+  userDetailsReducer,
+  userLoginReducer,
+  userUpdateReducer,
+} from "./reducers/userReducers";
+import { userRegisterReducer } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   deviceList: deviceListReducer,
@@ -14,9 +20,19 @@ const reducer = combineReducers({
   dateList: dateListReducer,
   dateDetails: dateDetailsReducer,
   activity: activityReducer,
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
+  userUpdate: userUpdateReducer,
 });
 
-const initialState = {};
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : null;
+
+const initialState = {
+  userLogin: { userInfo: userInfoFromStorage },
+};
 
 const middleware = [thunk];
 
