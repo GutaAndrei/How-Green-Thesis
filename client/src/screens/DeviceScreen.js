@@ -1,48 +1,66 @@
-import React from "react";
-import { Form, Button, Card, Container } from "react-bootstrap";
-import devices from "../devices";
+import React, { useEffect } from "react";
+import { Row, Button, Card, Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { listDeviceDetails } from "../actions/deviceActions";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 
-const DeviceScreen = ({ match }) => {
-  const device = devices.find((p) => p._id === match.params.id);
+const DeviceScreen = ({ history, match }) => {
+  const dispatch = useDispatch();
+
+  const deviceDetails = useSelector((state) => state.deviceDetails);
+  const { loading, error, device } = deviceDetails;
+
+  useEffect(() => {
+    dispatch(listDeviceDetails(match.params.id));
+  }, [dispatch, match]);
+
+  const addToActivity = () => {
+    history.push(`/activity/${match.params.id}`);
+  };
+
   return (
     <Container className="vh-100">
-      <Card className="m-4 p-2">
-        <Card.Body>
-          <Form>
-            <Form.Group controlId="formDeviceName">
-              <Form.Label as="h3">Device Name</Form.Label>
-              <Form.Control
-                autoComplete="off"
-                type="text"
-                placeholder={device.name}
-              />
-            </Form.Group>
-            <Form.Group controlId="formWattage">
-              <Form.Label as="h3">
-                <i className="fas fa-bolt"></i> Watts
-              </Form.Label>
-              <Form.Control
-                autoComplete="off"
-                type="text"
-                placeholder={device.watts}
-              />
-            </Form.Group>
-            <Form.Group controlId="formHours">
-              <Form.Label as="h3">
-                <i className="far fa-clock"></i> Hours of use
-              </Form.Label>
-              <Form.Control
-                autoComplete="off"
-                type="text"
-                placeholder={device.hours}
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              <i className="fas fa-check"></i> Submit
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <Card className="my-3 p-2">
+          <Card.Body>
+            <Card.Title as="h1">{device.name}</Card.Title>
+            <Card.Text as="h3">Watts: {device.watts}</Card.Text>
+            <Card.Text as="h3">Hours of use: {device.hours}</Card.Text>
+            <Row style={{ justifyContent: "space-between" }}>
+              <Button
+                style={{ maxWidth: "300px" }}
+                type="button"
+                className="btn-block"
+                variant="info"
+              >
+                Edit
+              </Button>
+              <Button
+                style={{ maxWidth: "300px" }}
+                type="button"
+                className="btn-block"
+                onClick={addToActivity}
+                variant="success"
+              >
+                Add for today
+              </Button>
+              <Button
+                style={{ maxWidth: "300px" }}
+                type="button"
+                className="btn-block"
+                variant="danger"
+              >
+                Delete
+              </Button>
+            </Row>
+          </Card.Body>
+        </Card>
+      )}
     </Container>
   );
 };
