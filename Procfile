@@ -1,1 +1,1 @@
-web: node backend/server
+worker: node backend/server
