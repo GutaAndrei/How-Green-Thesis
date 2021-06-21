@@ -8,8 +8,11 @@ import {
 import { dateListReducer, dateDetailsReducer } from "./reducers/dateReducers";
 import { activityReducer } from "./reducers/activityReducers";
 import {
+  userDeleteReducer,
   userDetailsReducer,
+  userListReducer,
   userLoginReducer,
+  userUpdateIdReducer,
   userUpdateReducer,
 } from "./reducers/userReducers";
 import { userRegisterReducer } from "./reducers/userReducers";
@@ -24,6 +27,9 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdate: userUpdateReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
+  userUpdateId: userUpdateIdReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
