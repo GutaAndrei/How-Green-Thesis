@@ -1,9 +1,15 @@
 import express from "express";
+
 const router = express.Router();
-import { getDeviceById, getDevices } from "../controllers/deviceController.js";
+import {
+  getDeviceById,
+  getDevices,
+  deleteDevice,
+  addDevice,
+} from "../controllers/deviceController.js";
 
-router.route("/").get(getDevices);
+router.route("/").get(getDevices).post(addDevice);
 
-router.route("/:id").get(getDeviceById);
+router.route("/:id").get(getDeviceById).delete(deleteDevice);
 
 export default router;

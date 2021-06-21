@@ -29,10 +29,14 @@ const RegisterScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
+    if (password.length < 6) {
+      setMessage("Password needs at least 6 characters");
     } else {
-      dispatch(register(name, email, password));
+      if (password !== confirmPassword) {
+        setMessage("Passwords do not match");
+      } else {
+        dispatch(register(name, email, password));
+      }
     }
   };
 

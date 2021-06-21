@@ -15,10 +15,6 @@ const DeviceScreen = ({ history, match }) => {
     dispatch(listDeviceDetails(match.params.id));
   }, [dispatch, match]);
 
-  const addToActivity = () => {
-    history.push(`/activity/${match.params.id}`);
-  };
-
   return (
     <Container className="vh-100">
       {loading ? (
@@ -29,8 +25,8 @@ const DeviceScreen = ({ history, match }) => {
         <Card className="my-3 p-2">
           <Card.Body>
             <Card.Title as="h1">{device.name}</Card.Title>
-            <Card.Text as="h3">Watts: {device.watts}</Card.Text>
-            <Card.Text as="h3">Hours of use: {device.hours}</Card.Text>
+            <Card.Text as="h4">Watts: {device.watts}</Card.Text>
+            <Card.Text as="h4">Hours of use: {device.hours}</Card.Text>
             <Row style={{ justifyContent: "space-between" }}>
               <Button
                 style={{ maxWidth: "300px" }}
@@ -39,15 +35,6 @@ const DeviceScreen = ({ history, match }) => {
                 variant="info"
               >
                 Edit
-              </Button>
-              <Button
-                style={{ maxWidth: "300px" }}
-                type="button"
-                className="btn-block"
-                onClick={addToActivity}
-                variant="success"
-              >
-                Add for today
               </Button>
               <Button
                 style={{ maxWidth: "300px" }}

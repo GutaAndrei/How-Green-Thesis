@@ -12,12 +12,10 @@ const ActivityScreen = () => {
 
   const dateList = useSelector((state) => state.dateList);
   const { loading, error, dates } = dateList;
-  const isTodayAdded = dates.find((date, index) => {
-    if (
+  const isTodayAdded = dates.find(
+    (date, index) =>
       new Date(date.date).toDateString() === new Date(Date.now()).toDateString()
-    )
-      return true;
-  });
+  );
   useEffect(() => {
     dispatch(listDates());
   }, [dispatch]);
@@ -26,11 +24,11 @@ const ActivityScreen = () => {
     <>
       <h1>Your Activity</h1>
       {isTodayAdded ? (
-        <Button variant="warning" disabled>
+        <Button variant="primary" disabled>
           You already have an entry for today
         </Button>
       ) : (
-        <Button href={`/activity/add`} variant="warning">
+        <Button href={`/activity/add`} variant="primary">
           Add devices for today
         </Button>
       )}

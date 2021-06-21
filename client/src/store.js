@@ -4,6 +4,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   deviceListReducer,
   deviceDetailsReducer,
+  deviceDeleteReducer,
+  deviceAddReducer,
 } from "./reducers/deviceReducers";
 import { dateListReducer, dateDetailsReducer } from "./reducers/dateReducers";
 import { activityReducer } from "./reducers/activityReducers";
@@ -20,6 +22,8 @@ import { userRegisterReducer } from "./reducers/userReducers";
 const reducer = combineReducers({
   deviceList: deviceListReducer,
   deviceDetails: deviceDetailsReducer,
+  deviceDelete: deviceDeleteReducer,
+  deviceAdd: deviceAddReducer,
   dateList: dateListReducer,
   dateDetails: dateDetailsReducer,
   activity: activityReducer,

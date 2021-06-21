@@ -24,15 +24,15 @@ const ProfileScreen = ({ location, history }) => {
   const { success } = userUpdate;
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/login");
-    } else {
+    if (userInfo) {
       if (!user.name) {
         dispatch(getUserDetails("profile"));
       } else {
         setName(user.name);
         setEmail(user.email);
       }
+    } else {
+      history.push("/login");
     }
   }, [dispatch, history, userInfo, user]);
 
