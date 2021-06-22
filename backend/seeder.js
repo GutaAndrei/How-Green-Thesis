@@ -17,7 +17,6 @@ const importData = async () => {
   try {
     await Device.deleteMany();
     await User.deleteMany();
-    await DeviceDate.deleteMany();
 
     const createdUsers = await User.insertMany(users);
 
@@ -27,12 +26,7 @@ const importData = async () => {
       return { ...device, user: adminUser };
     });
 
-    const sampleDates = dates.map((date) => {
-      return { ...date, user: adminUser };
-    });
-
     await Device.insertMany(sampleDevices);
-    await DeviceDate.insertMany(sampleDates);
 
     console.log("Data Imported!".green.inverse);
     process.exit();
@@ -46,7 +40,6 @@ const destroyData = async () => {
   try {
     await Device.deleteMany();
     await User.deleteMany();
-    await DeviceDate.deleteMany();
 
     console.log("Data Destroyed!".red.inverse);
     process.exit();

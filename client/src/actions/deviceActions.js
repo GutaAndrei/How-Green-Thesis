@@ -17,10 +17,22 @@ import {
   DEVICE_UPDATE_REQUEST,
 } from "../constants/deviceConstants";
 
-export const listDevices = () => async (dispatch) => {
+export const listDevices = () => async (dispatch, getState) => {
   try {
     dispatch({ type: DEVICE_LIST_REQUEST });
-    const { data } = await axios.get("/api/devices");
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get("/api/devices/mydevices", config);
+
     dispatch({
       type: DEVICE_LIST_SUCCESS,
       payload: data,
@@ -88,33 +100,28 @@ export const updateDevice = (device) => async (dispatch, getState) => {
   }
 };
 
-export const addDevice = (name, watts, hours) => async (dispatch) => {
+export const addDevice = (device) => async (dispatch, getState) => {
   try {
     dispatch({
       type: DEVICE_ADD_REQUEST,
     });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    const { data } = await axios.post(
-      "/api/devices",
-      { name, watts, hours },
-      config
-    );
+    const { data } = await axios.post("/api/devices", device, config);
     dispatch({
       type: DEVICE_ADD_SUCCESS,
       payload: data,
     });
-
-    dispatch({
-      type: DEVICE_LIST_SUCCESS,
-      payload: data,
-    });
-
-    localStorage.setItem("devices", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: DEVICE_ADD_FAIL,

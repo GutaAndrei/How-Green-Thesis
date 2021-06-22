@@ -7,9 +7,11 @@ import {
   deleteDevice,
   addDevice,
 } from "../controllers/deviceController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
-router.route("/").get(getDevices).post(addDevice);
+router.route("/").post(protect, addDevice);
+router.route("/mydevices").get(protect, getDevices);
 
-router.route("/:id").get(getDeviceById).delete(deleteDevice);
+router.route("/:id").get(protect, getDeviceById).delete(protect, deleteDevice);
 
 export default router;

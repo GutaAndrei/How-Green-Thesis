@@ -2,11 +2,11 @@ import asyncHandler from "express-async-handler";
 import Device from "../models/deviceModel.js";
 import User from "../models/userModel.js";
 
-// @desc    Fetch all devices
-// @route   GET /api/devices
-// @access  Public
+// @desc    Fetch all logged in user devices
+// @route   GET /api/devices/mydevices
+// @access  Private
 const getDevices = asyncHandler(async (req, res) => {
-  const devices = await Device.find({});
+  const devices = await Device.find({ user: req.user._id });
   res.json(devices);
 });
 
@@ -25,27 +25,22 @@ const getDeviceById = asyncHandler(async (req, res) => {
 
 // @desc    Add a device
 // @route   POST /api/devices/
-// @access  Public
+// @access  Private
 const addDevice = asyncHandler(async (req, res) => {
   const { name, watts, hours } = req.body;
   const deviceExists = await Device.findOne({ name });
   if (deviceExists) {
     res.status(400);
     throw new Error("Device already exists");
-  }
-
-  const device = await Device.create({ name, watts, hours });
-
-  if (device) {
-    res.status(201).json({
-      _id: device._id,
-      name: device.name,
-      email: device.email,
-      hours: device.hours,
-    });
   } else {
-    res.status(400);
-    throw new Error("Invalid user data");
+    const device = new Device({ name, watts, hours, user: req.user._id });
+    const createdDevice = await device.save();
+    if (createdDevice) {
+      res.status(201).json(createdDevice);
+    } else {
+      res.status(400);
+      throw new Error("Invalid user data");
+    }
   }
 });
 

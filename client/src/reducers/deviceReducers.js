@@ -19,7 +19,7 @@ import {
 export const deviceListReducer = (state = { devices: [] }, action) => {
   switch (action.type) {
     case DEVICE_LIST_REQUEST:
-      return { loading: true, devices: [] };
+      return { loading: true };
     case DEVICE_LIST_SUCCESS:
       return { loading: false, devices: action.payload };
     case DEVICE_LIST_FAIL:
@@ -60,7 +60,7 @@ export const deviceAddReducer = (state = {}, action) => {
     case DEVICE_ADD_REQUEST:
       return { loading: true };
     case DEVICE_ADD_SUCCESS:
-      return { loading: false, deviceInfo: action.payload };
+      return { loading: false, success: true, device: action.payload };
     case DEVICE_ADD_FAIL:
       return { loading: false, error: action.payload };
     default:

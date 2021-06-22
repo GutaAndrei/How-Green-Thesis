@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const deviceDateSchema = mongoose.Schema(
+const activitySchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -14,9 +14,14 @@ const deviceDateSchema = mongoose.Schema(
     },
     devices: [
       {
-        type: mongoose.Schema.Types.Mixed,
-        required: true,
-        ref: "Device",
+        name: { type: String, required: true },
+        watts: { type: Number, required: true },
+        hours: { type: Number, required: true },
+        device: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "Device",
+        },
       },
     ],
   },
@@ -25,6 +30,6 @@ const deviceDateSchema = mongoose.Schema(
   }
 );
 
-const DeviceDate = mongoose.model("DeviceDate", deviceDateSchema);
+const Activity = mongoose.model("Activity", activitySchema);
 
-export default DeviceDate;
+export default Activity;
