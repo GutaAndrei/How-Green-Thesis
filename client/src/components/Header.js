@@ -39,7 +39,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link href="/devices">
+              <Nav.Link href="/devices/mydevices">
                 <FontAwesomeIcon icon={faLaptopHouse} /> Devices
               </Nav.Link>
               <Nav.Link href="/activity">

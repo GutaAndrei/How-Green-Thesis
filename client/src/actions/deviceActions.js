@@ -100,7 +100,7 @@ export const updateDevice = (device) => async (dispatch, getState) => {
   }
 };
 
-export const addDevice = (device) => async (dispatch, getState) => {
+export const addDevice = (name, watts, hours) => async (dispatch, getState) => {
   try {
     dispatch({
       type: DEVICE_ADD_REQUEST,
@@ -116,8 +116,11 @@ export const addDevice = (device) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-
-    const { data } = await axios.post("/api/devices", device, config);
+    const { data } = await axios.post(
+      "/api/devices/",
+      { name, watts, hours },
+      config
+    );
     dispatch({
       type: DEVICE_ADD_SUCCESS,
       payload: data,

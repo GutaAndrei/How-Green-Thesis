@@ -1,11 +1,11 @@
 import asyncHandler from "express-async-handler";
 import Device from "../models/deviceModel.js";
-import User from "../models/userModel.js";
 
 // @desc    Fetch all logged in user devices
 // @route   GET /api/devices/mydevices
 // @access  Private
 const getDevices = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
   const devices = await Device.find({ user: req.user._id });
   res.json(devices);
 });
@@ -28,7 +28,8 @@ const getDeviceById = asyncHandler(async (req, res) => {
 // @access  Private
 const addDevice = asyncHandler(async (req, res) => {
   const { name, watts, hours } = req.body;
-  const deviceExists = await Device.findOne({ name });
+
+  const deviceExists = await Device.findOne({ name, user: req.user._id });
   if (deviceExists) {
     res.status(400);
     throw new Error("Device already exists");
@@ -39,7 +40,7 @@ const addDevice = asyncHandler(async (req, res) => {
       res.status(201).json(createdDevice);
     } else {
       res.status(400);
-      throw new Error("Invalid user data");
+      throw new Error("Invalid device data");
     }
   }
 });

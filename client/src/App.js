@@ -12,6 +12,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import DeviceAddScreen from "./screens/DeviceAddScreen";
+import DeviceListScreen from "./screens/DeviceListScreen";
 
 const App = () => {
   return (
@@ -20,13 +21,14 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Route path="/device/:id" component={DeviceScreen} />
+          <Route path="/devices/mydevices" component={DeviceListScreen} />
+          <Route path="/devices/add-device" component={DeviceAddScreen} />
           <Route path="/activity" component={ActivityScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
           <Route path="/admin/userlist" component={UserListScreen} />
-          <Route path="/devices/add-device" component={DeviceAddScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

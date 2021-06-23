@@ -18,12 +18,13 @@ const DeviceAddScreen = ({ history }) => {
 
   useEffect(() => {
     if (success) {
-      history.push("/mydevices");
+      history.push("/devices/mydevices");
     }
   }, [history, device, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(name, watts, hours);
     dispatch(addDevice(name, watts, hours));
   };
 
