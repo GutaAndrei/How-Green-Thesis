@@ -11,6 +11,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
+import DeviceAddScreen from "./screens/DeviceAddScreen";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
           <Route path="/admin/userlist" component={UserListScreen} />
+          <Route path="/devices/add-device" component={DeviceAddScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

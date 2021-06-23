@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { register } from "../actions/userActions";
 import { addDevice } from "../actions/deviceActions";
 
-const DeviceAddScreen = ({ location, history }) => {
+const DeviceAddScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -16,13 +14,13 @@ const DeviceAddScreen = ({ location, history }) => {
   const [hours, setHours] = useState(0);
 
   const deviceAdd = useSelector((state) => state.deviceAdd);
-  const { loading, success, error } = deviceAdd;
+  const { loading, success, error, device } = deviceAdd;
 
   useEffect(() => {
     if (success) {
-      history.push("/devices");
+      history.push("/mydevices");
     }
-  }, [history, success]);
+  }, [history, device, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -29,7 +29,7 @@ const HomeScreen = ({ history }) => {
   return (
     <>
       <h1>Your Devices</h1>
-      <Button href={``} variant="primary">
+      <Button href={`/devices/add-device`} variant="primary">
         Add device
       </Button>
       {loading ? (
