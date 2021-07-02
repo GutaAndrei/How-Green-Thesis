@@ -1,18 +1,37 @@
 import axios from "axios";
-import { ACTIVITY_ADD_DEVICE } from "../constants/activityConstants";
+import {
+  ACTIVITY_LIST_FAIL,
+  ACTIVITY_LIST_REQUEST,
+  ACTIVITY_LIST_SUCCESS,
+} from "../constants/activityConstants";
 
-export const addToActivity = (id) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/devices/${id}`);
+export const listActivities = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ACTIVITY_LIST_REQUEST });
 
-  dispatch({
-    type: ACTIVITY_ADD_DEVICE,
-    payload: {
-      device: data._id,
-      name: data.name,
-      hours: data.hours,
-      watts: data.hours,
-    },
-  });
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
-  localStorage.setItem("devices", JSON.stringify(getState().activity.devices));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get("/api/activities/myactivities", config);
+
+    dispatch({
+      type: ACTIVITY_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ACTIVITY_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

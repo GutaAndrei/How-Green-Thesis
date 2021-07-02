@@ -5,7 +5,6 @@ import Device from "../models/deviceModel.js";
 // @route   GET /api/devices/mydevices
 // @access  Private
 const getDevices = asyncHandler(async (req, res) => {
-  console.log(req.user._id);
   const devices = await Device.find({ user: req.user._id });
   res.json(devices);
 });

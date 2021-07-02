@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 import { Row, Col, Button } from "react-bootstrap";
 import { listDevices } from "../actions/deviceActions";
 
-const HomeScreen = ({ history }) => {
+const DeviceListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const deviceList = useSelector((state) => state.deviceList);
@@ -36,7 +36,7 @@ const HomeScreen = ({ history }) => {
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
-      ) : !deviceList.length ? (
+      ) : deviceList === [] ? (
         <Row>
           {devices.map((device) => (
             <Col key={device._id} sm={14} md={7} lg={5} xl={3}>
@@ -45,10 +45,10 @@ const HomeScreen = ({ history }) => {
           ))}
         </Row>
       ) : (
-        <Message variant="info">You currently don't have any devices</Message>
+        <Message variant="info">You have no registered devices</Message>
       )}
     </>
   );
 };
 
-export default HomeScreen;
+export default DeviceListScreen;

@@ -42,7 +42,7 @@ const Header = () => {
               <Nav.Link href="/devices/mydevices">
                 <FontAwesomeIcon icon={faLaptopHouse} /> Devices
               </Nav.Link>
-              <Nav.Link href="/activity">
+              <Nav.Link href="/activities/myactivities">
                 <FontAwesomeIcon icon={faCalendarAlt} /> Activity
               </Nav.Link>
               {userInfo ? (

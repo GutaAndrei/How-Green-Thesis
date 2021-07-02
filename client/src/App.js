@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import DeviceScreen from "./screens/DeviceScreen";
-import ActivityScreen from "./screens/ActivityScreen";
+import ActivitiesScreen from "./screens/ActivitiesScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/device/:id" component={DeviceScreen} />
           <Route path="/devices/mydevices" component={DeviceListScreen} />
           <Route path="/devices/add-device" component={DeviceAddScreen} />
-          <Route path="/activity" component={ActivityScreen} />
+          <Route path="/activities/myactivities" component={ActivitiesScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/profile" component={ProfileScreen} />

@@ -1,5 +1,5 @@
 const currentDate = Date.now();
-const dates = [
+const activities = [
   {
     date: new Date(currentDate),
     devices: [
@@ -32,4 +32,4 @@ const dates = [
   },
 ];
 
-export default dates;
+export default activities;

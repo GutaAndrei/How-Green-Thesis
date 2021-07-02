@@ -5,7 +5,7 @@ import colors from "colors";
 import path from "path";
 import connectDB from "./config/db.js";
 import deviceRoutes from "./routes/deviceRoutes.js";
-import dateRoutes from "./routes/dateRoutes.js";
+import activityRoutes from "./routes/activityRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/devices", deviceRoutes);
-app.use("/api/dates", dateRoutes);
+app.use("/api/activities", activityRoutes);
 app.use("/api/users", userRoutes);
 
 const __dirname = path.resolve();
