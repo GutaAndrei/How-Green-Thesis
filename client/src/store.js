@@ -34,6 +34,7 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userUpdateId: userUpdateIdReducer,
   activityList: activityListReducer,
+  activityAddDevices: activityAddDevicesReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

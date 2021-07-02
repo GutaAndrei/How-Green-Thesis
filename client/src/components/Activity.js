@@ -14,7 +14,6 @@ const Activity = ({ activity }) => {
     wattSum += devices[i].watts;
     hoursTotal += devices[i].hours;
   }
-  console.log("wattsum", wattSum);
   const electrCost = (
     ((wattSum + hoursTotal / 1000) * cost) /
     100

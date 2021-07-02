@@ -23,19 +23,15 @@ const ActivitiesScreen = ({ history }) => {
     }
   }, [dispatch, history, userInfo]);
 
-  console.log(activities);
-
-  const isTodayAdded = false;
-  // activities.find(
-  //   (activity, index) =>
-  //     new Date(activity.date).toDateString() ===
-  //     new Date(Date.now()).toDateString()
-  // );
-
   return (
     <>
       <h1>Your Activity</h1>
-      {isTodayAdded ? (
+      {activities &&
+      activities.find(
+        (activity, index) =>
+          new Date(activity.date).toDateString() ===
+          new Date(Date.now()).toDateString()
+      ) ? (
         <Button variant="primary" disabled>
           You already have an entry for today
         </Button>
@@ -44,7 +40,6 @@ const ActivitiesScreen = ({ history }) => {
           Add devices for today
         </Button>
       )}
-
       {loading ? (
         <Loader />
       ) : error ? (

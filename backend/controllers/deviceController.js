@@ -45,7 +45,7 @@ const addDevice = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update device
-// @route   PUT /api/devices/device
+// @route   PUT /api/devices/:id
 // @access  Public
 const updateDevice = asyncHandler(async (req, res) => {
   const deviceExists = await Device.findOne({ name });
@@ -83,4 +83,4 @@ const deleteDevice = asyncHandler(async (req, res) => {
   }
 });
 
-export { getDeviceById, getDevices, deleteDevice, addDevice };
+export { getDeviceById, getDevices, deleteDevice, addDevice, updateDevice };

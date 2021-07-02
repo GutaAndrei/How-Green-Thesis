@@ -9,7 +9,6 @@ const activitySchema = mongoose.Schema(
     },
     date: {
       type: Date,
-      required: true,
       default: Date.now(),
     },
     devices: [

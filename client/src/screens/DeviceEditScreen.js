@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { getUserDetails, updateUserById } from "../actions/userActions";
-import { USER_UPDATE_RESET } from "../constants/userConstants";
+import { updateDevice, listDeviceDetails } from "../actions/deviceActions";
 
 const DeviceEditScreen = ({ match, history }) => {
-  const userId = match.params.id;
+  const deviceId = match.params.id;
   const [name, setName] = useState("");
   const [watts, setWatts] = useState(0);
   const [hours, setHours] = useState(false);
@@ -17,7 +16,7 @@ const DeviceEditScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const deviceDetails = useSelector((state) => state.deviceDetails);
-  const { loading, error, user } = deviceDetails;
+  const { loading, error, device } = deviceDetails;
 
   const deviceUpdate = useSelector((state) => state.deviceUpdate);
   const {
@@ -28,22 +27,21 @@ const DeviceEditScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: DEVICE_UPDATE_RESET });
-      history.push("/admin/userlist");
+      history.push("/devices/mydevices");
     } else {
-      if (!user.name || user._id !== userId) {
-        dispatch(getUserDetails(userId));
+      if (!device.name || device._id !== deviceId) {
+        dispatch(listDeviceDetails(deviceId));
       } else {
-        setName(user.name);
-        setWatts(user.email);
-        setHours(user.isAdmin);
+        setName(device.name);
+        setWatts(device.watts);
+        setHours(device.hours);
       }
     }
-  }, [dispatch, history, user, userId, successUpdate]);
+  }, [dispatch, history, device, deviceId, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateUserById({ _id: userId, name, email, isAdmin }));
+    dispatch(updateDevice({ _id: deviceId, name, watts, hours }));
   };
 
   return (
@@ -70,22 +68,23 @@ const DeviceEditScreen = ({ match, history }) => {
                 onChange={(e) => setName(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="email">
-              <Form.Label>Email Address</Form.Label>
+            <Form.Group controlId="watts">
+              <Form.Label>Watts</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Enter Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="number"
+                placeholder="Enter Watts"
+                value={watts}
+                onChange={(e) => setWatts(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId="isadmin">
-              <Form.Check
-                type="checkbox"
-                label="Is Admin"
-                checked={isAdmin}
-                onChange={(e) => setIsAdmin(e.target.checked)}
-              ></Form.Check>
+            <Form.Group controlId="hours">
+              <Form.Label>Hours</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter Hours"
+                value={hours}
+                onChange={(e) => setHours(e.target.value)}
+              ></Form.Control>
             </Form.Group>
             <Button type="submit" variant="primary">
               Update

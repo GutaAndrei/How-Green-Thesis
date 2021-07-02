@@ -48,10 +48,21 @@ export const listDevices = () => async (dispatch, getState) => {
   }
 };
 
-export const listDeviceDetails = (id) => async (dispatch) => {
+export const listDeviceDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: DEVICE_DETAILS_REQUEST });
-    const { data } = await axios.get(`/api/devices/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      heaers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/devices/${id}`, config);
     dispatch({
       type: DEVICE_DETAILS_SUCCESS,
       payload: data,
@@ -84,9 +95,17 @@ export const updateDevice = (device) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/api/devices/device`, device, config);
+    const { data } = await axios.put(
+      `/api/devices/${device._id}`,
+      device,
+      config
+    );
     dispatch({
       type: DEVICE_UPDATE_SUCCESS,
+      payload: data,
+    });
+    dispatch({
+      type: DEVICE_DETAILS_SUCCESS,
       payload: data,
     });
   } catch (error) {

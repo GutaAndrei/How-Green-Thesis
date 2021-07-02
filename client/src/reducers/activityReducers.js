@@ -1,30 +1,20 @@
 import {
-  ACTIVITY_ADD_DEVICE,
-  ACTIVITY_ADD_DEVICES,
+  ACTIVITY_ADD_DEVICES_FAIL,
+  ACTIVITY_ADD_DEVICES_REQUEST,
+  ACTIVITY_ADD_DEVICES_SUCCESS,
   ACTIVITY_LIST_FAIL,
   ACTIVITY_LIST_REQUEST,
   ACTIVITY_LIST_SUCCESS,
-  ACTIVITY_REMOVE_DEVICE,
 } from "../constants/activityConstants";
 
-export const activityAddDevicesReducer = (state = { devices: [] }, action) => {
+export const activityAddDevicesReducer = (state = {}, action) => {
   switch (action.type) {
-    case ACTIVITY_ADD_DEVICE:
-      const device = action.payload;
-      const existDevice = state.devices.find((x) => x.device === device.device);
-      if (existDevice) {
-        return {
-          ...state,
-          devices: state.devices.map((x) =>
-            x.device === existDevice.device ? device : x
-          ),
-        };
-      } else {
-        return {
-          ...state,
-          devices: [...state.devices, device],
-        };
-      }
+    case ACTIVITY_ADD_DEVICES_REQUEST:
+      return { loading: true };
+    case ACTIVITY_ADD_DEVICES_SUCCESS:
+      return { loading: false, success: true, activity: action.payload };
+    case ACTIVITY_ADD_DEVICES_FAIL:
+      return { loading: false, success: true, error: action.payload };
     default:
       return state;
   }
@@ -35,7 +25,7 @@ export const activityListReducer = (state = { activities: [] }, action) => {
     case ACTIVITY_LIST_REQUEST:
       return { loading: true };
     case ACTIVITY_LIST_SUCCESS:
-      return { loading: false, activities: action.payload };
+      return { loading: false, success: true, activities: action.payload };
     case ACTIVITY_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
