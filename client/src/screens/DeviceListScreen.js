@@ -36,7 +36,7 @@ const DeviceListScreen = ({ history }) => {
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
-      ) : deviceList === [] ? (
+      ) : !deviceList.length ? (
         <Row>
           {devices.map((device) => (
             <Col key={device._id} sm={14} md={7} lg={5} xl={3}>

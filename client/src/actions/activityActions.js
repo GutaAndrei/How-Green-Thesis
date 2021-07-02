@@ -20,7 +20,6 @@ export const listActivities = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get("/api/activities/myactivities", config);
-
     dispatch({
       type: ACTIVITY_LIST_SUCCESS,
       payload: data,
