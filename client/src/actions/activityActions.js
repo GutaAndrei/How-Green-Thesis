@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  ACTIVITY_ADD_DEVICE,
   ACTIVITY_LIST_FAIL,
   ACTIVITY_LIST_REQUEST,
   ACTIVITY_LIST_SUCCESS,
@@ -20,6 +21,7 @@ export const listActivities = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get("/api/activities/myactivities", config);
+
     dispatch({
       type: ACTIVITY_LIST_SUCCESS,
       payload: data,

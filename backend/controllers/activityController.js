@@ -9,4 +9,20 @@ const getActivities = asyncHandler(async (req, res) => {
   res.json(activities);
 });
 
-export { getActivities };
+// @desc    Create new activity
+// @route   POST/api/activities
+// @access  Private
+const addActivity = asyncHandler(async (req, res) => {
+  const devices = req.body;
+
+  const activity = new Activity({ user: req.user._id, devices });
+  const createdActivity = await activity.save();
+  if (createdActivity) {
+    res.status(201).json(createdActivity);
+  } else {
+    res.status(400);
+    throw new Error("Invalid activity data");
+  }
+});
+
+export { getActivities, addActivity };

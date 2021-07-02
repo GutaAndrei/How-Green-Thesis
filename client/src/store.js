@@ -16,7 +16,10 @@ import {
   userUpdateReducer,
 } from "./reducers/userReducers";
 import { userRegisterReducer } from "./reducers/userReducers";
-import { activityListReducer } from "./reducers/activityReducers";
+import {
+  activityAddDevicesReducer,
+  activityListReducer,
+} from "./reducers/activityReducers";
 
 const reducer = combineReducers({
   deviceList: deviceListReducer,

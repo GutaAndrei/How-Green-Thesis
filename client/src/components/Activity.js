@@ -4,11 +4,17 @@ import "../bootstrap.min.css";
 import "./style.css";
 
 const cost = 0.12;
+let wattSum = 0;
+let hoursTotal = 0;
 
-const Activity = ({ date }) => {
-  const today = new Date(date.date);
-  const wattSum = date.devices.reduce((a, b) => a.watts + b.watts);
-  const hoursTotal = date.devices.reduce((a, b) => a.hours + b.hours);
+const Activity = ({ activity }) => {
+  const devices = activity.devices;
+  const today = new Date(activity.date);
+  for (let i = 0; i < devices.length; i++) {
+    wattSum += devices[i].watts;
+    hoursTotal += devices[i].hours;
+  }
+  console.log("wattsum", wattSum);
   const electrCost = (
     ((wattSum + hoursTotal / 1000) * cost) /
     100
@@ -22,7 +28,7 @@ const Activity = ({ date }) => {
           <strong>{today.toDateString()}</strong>
         </Card.Title>
         <ListGroup variant="flush">
-          {date.devices.map((device) => (
+          {devices.map((device) => (
             <ListGroup.Item key={device._id}>
               {device.name}, {device.hours} hours, {device.watts}W
             </ListGroup.Item>

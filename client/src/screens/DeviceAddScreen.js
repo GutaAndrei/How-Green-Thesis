@@ -24,7 +24,6 @@ const DeviceAddScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(name, watts, hours);
     dispatch(addDevice(name, watts, hours));
   };
 
