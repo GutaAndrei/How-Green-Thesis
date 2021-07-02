@@ -10,19 +10,18 @@ const ActivitiesScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const activityList = useSelector((state) => state.activityList);
-  console.log("Activity List", activityList);
   const { loading, error, activities } = activityList;
+
   console.log("activities", activities);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const isTodayAdded =
-    !activities &&
-    activities.find(
-      (activity, index) =>
-        new Date(activity.date).toDateString() ===
-        new Date(Date.now()).toDateString()
-    );
+  const isTodayAdded = false;
+  // activities.find(
+  //   (activity, index) =>
+  //     new Date(activity.date).toDateString() ===
+  //     new Date(Date.now()).toDateString()
+  // );
 
   console.log(activities);
 
@@ -51,7 +50,7 @@ const ActivitiesScreen = ({ history }) => {
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
-      ) : !activityList.length ? (
+      ) : !activities.length ? (
         <Row>
           {activities.map((date) => (
             <Col key={date._id} sm={14} md={7} lg={5} xl={4}>
