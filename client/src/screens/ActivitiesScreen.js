@@ -12,6 +12,9 @@ const ActivitiesScreen = ({ history }) => {
   const activityList = useSelector((state) => state.activityList);
   const { loading, error, activities } = activityList;
 
+  const activityDelete = useSelector((state) => state.activityDelete);
+  const { success } = activityDelete;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -21,7 +24,7 @@ const ActivitiesScreen = ({ history }) => {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, success]);
 
   return (
     <>

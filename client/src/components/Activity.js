@@ -1,13 +1,24 @@
 import React from "react";
 import { Card, Row, Button, ListGroup } from "react-bootstrap";
-import "../bootstrap.min.css";
+import { useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
+import { deleteActivity } from "../actions/activityActions";
 
 const cost = 0.12;
 let wattSum = 0;
 let hoursTotal = 0;
 
 const Activity = ({ activity }) => {
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(deleteActivity(id));
+    }
+  };
+
   const devices = activity.devices;
   const today = new Date(activity.date);
   for (let i = 0; i < devices.length; i++) {
@@ -35,14 +46,14 @@ const Activity = ({ activity }) => {
         </ListGroup>
         <br />
         <Card.Text as="h5">
-          You have consumed {wattSum}W Today, costing {electrCost}$
+          You have consumed {wattSum}W, costing {electrCost}$
         </Card.Text>
         <Row style={{ justifyContent: "space-between" }}>
-          <Button href="#" variant="info">
-            <i className="fas fa-edit"></i> Edit
+          <Button href={`/activity/${activity._id}`} variant="info">
+            <FontAwesomeIcon icon={faEdit} /> Edit
           </Button>
-          <Button variant="danger">
-            <i className="far fa-trash-alt"></i> Delete
+          <Button onClick={() => deleteHandler(activity._id)} variant="danger">
+            <FontAwesomeIcon icon={faTrash} /> Delete
           </Button>
         </Row>
       </Card.Body>

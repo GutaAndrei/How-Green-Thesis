@@ -46,26 +46,23 @@ const addDevice = asyncHandler(async (req, res) => {
 
 // @desc    Update device
 // @route   PUT /api/devices/:id
-// @access  Public
+// @access  Private
 const updateDevice = asyncHandler(async (req, res) => {
-  const deviceExists = await Device.findOne({ name });
-  if (deviceExists) {
-    res.status(400);
-    throw new Error("Device already exists");
-  }
-
-  const device = await Device.create({ name, watts, hours });
-
+  const device = await Device.findById(req.params.id);
   if (device) {
-    res.status(201).json({
-      _id: device._id,
-      name: device.name,
-      email: device.email,
-      hours: device.hours,
+    device.name = req.body.name || device.name;
+    device.watts = req.body.watts || device.watts;
+    device.hours = req.body.hours || device.hours;
+    const updatedDevice = await device.save();
+    res.json({
+      _id: updatedDevice._id,
+      name: updatedDevice.name,
+      watts: updatedDevice.watts,
+      hours: updatedDevice.hours,
     });
   } else {
-    res.status(400);
-    throw new Error("Invalid user data");
+    res.status(404);
+    throw new Error("Device not found");
   }
 });
 

@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Row, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../bootstrap.min.css";
 import "./style.css";
 import {
   faClock,
@@ -12,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { deleteDevice } from "../actions/deviceActions";
 
-const Device = ({ device, history }) => {
+const Device = ({ device }) => {
   const dispatch = useDispatch();
 
   const deleteHandler = (id) => {

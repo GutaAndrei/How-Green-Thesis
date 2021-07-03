@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
-import DeviceScreen from "./screens/DeviceScreen";
+import DeviceEditScreen from "./screens/DeviceEditScreen";
 import ActivitiesScreen from "./screens/ActivitiesScreen";
 import ActivitiyAddScreen from "./screens/ActivityAddScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -14,6 +14,7 @@ import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import DeviceAddScreen from "./screens/DeviceAddScreen";
 import DeviceListScreen from "./screens/DeviceListScreen";
+import ActivityEditScreen from "./screens/ActivityEditScreen";
 
 const App = () => {
   return (
@@ -21,9 +22,10 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Container>
-          <Route path="/device/:id" component={DeviceScreen} />
+          <Route path="/device/:id" component={DeviceEditScreen} />
           <Route path="/devices/mydevices" component={DeviceListScreen} />
           <Route path="/devices/add-device" component={DeviceAddScreen} />
+          <Route path="/activity/:id" component={ActivityEditScreen} />
           <Route path="/activities/myactivities" component={ActivitiesScreen} />
           <Route
             path="/activities/add-activity"

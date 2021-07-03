@@ -47,7 +47,7 @@ export const deviceUpdateReducer = (state = {}, action) => {
     case DEVICE_UPDATE_REQUEST:
       return { loading: true };
     case DEVICE_UPDATE_SUCCESS:
-      return { loading: false, success: true, deviceInfo: action.payload };
+      return { loading: false, success: true };
     case DEVICE_UPDATE_FAIL:
       return { loading: false, error: action.payload };
     default:

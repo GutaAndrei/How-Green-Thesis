@@ -6,6 +6,7 @@ import {
   deviceDetailsReducer,
   deviceDeleteReducer,
   deviceAddReducer,
+  deviceUpdateReducer,
 } from "./reducers/deviceReducers";
 import {
   userDeleteReducer,
@@ -18,7 +19,10 @@ import {
 import { userRegisterReducer } from "./reducers/userReducers";
 import {
   activityAddDevicesReducer,
+  activityDeleteReducer,
+  activityDetailsReducer,
   activityListReducer,
+  activityUpdateReducer,
 } from "./reducers/activityReducers";
 
 const reducer = combineReducers({
@@ -26,6 +30,7 @@ const reducer = combineReducers({
   deviceDetails: deviceDetailsReducer,
   deviceDelete: deviceDeleteReducer,
   deviceAdd: deviceAddReducer,
+  deviceUpdate: deviceUpdateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -34,7 +39,10 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userUpdateId: userUpdateIdReducer,
   activityList: activityListReducer,
+  activityDetails: activityDetailsReducer,
   activityAddDevices: activityAddDevicesReducer,
+  activityUpdate: activityUpdateReducer,
+  activityDelete: activityDeleteReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
