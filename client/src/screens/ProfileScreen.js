@@ -95,9 +95,9 @@ const ProfileScreen = ({ location, history }) => {
           </Button>
         </Form>
       </Col>
-      <Col>
+      {/* <Col>
         <h2>My Activity</h2>
-      </Col>
+      </Col> */}
     </Row>
   );
 };
