@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { useDispatch, useSelector } from "react-redux";
 
+import Message from "./Message";
 import { listDevices } from "../actions/deviceActions";
 import { listActivities } from "../actions/activityActions";
 
@@ -17,19 +18,12 @@ export const ConsumptionChart = () => {
     activities,
   } = activityList;
 
-  const deviceList = useSelector((state) => state.deviceList);
-  const {
-    loading: deviceListLoading,
-    error: deviceListError,
-    devices,
-  } = deviceList;
-
   useEffect(() => {
     dispatch(listDevices());
     dispatch(listActivities());
   }, [dispatch]);
 
-  if (activities && devices) {
+  if (activities) {
     for (let i = 0; i < activities.length; i++) {
       let activityDevices = activities[i].devices;
       for (let j = 0; j < activityDevices.length; j++) {
@@ -56,16 +50,25 @@ export const ConsumptionChart = () => {
 
   const data = [["Device", "Hours used"], ...arr];
   return (
-    <Chart
-      chartType="PieChart"
-      loader={<div>Loading Chart</div>}
-      data={data}
-      options={{
-        title: "Most Used Devices",
-      }}
-      width={"650px"}
-      height={"650px"}
-    />
+    <>
+      {activities && activities.length ? (
+        <Chart
+          chartType="PieChart"
+          loader={<div>Loading Chart</div>}
+          data={data}
+          options={{
+            title: "Most Used Devices",
+          }}
+          width={"650px"}
+          height={"650px"}
+        />
+      ) : (
+        <Message variant="info">
+          There are no activities on your profile. Add an activity to see a
+          report of top 5 devices that used the most resources.
+        </Message>
+      )}
+    </>
   );
 };
 
