@@ -30,10 +30,7 @@ export const ConsumptionChart = () => {
         if (maxDevices[activityDevices[j].name]) {
           maxDevices[activityDevices[j].watts] += activityDevices[j].watts;
         } else {
-          maxDevices.push({
-            name: activityDevices[j].name,
-            watts: activityDevices[j].watts,
-          });
+          maxDevices.push([activityDevices[j].name, activityDevices[j].watts]);
         }
       }
     }
@@ -43,12 +40,7 @@ export const ConsumptionChart = () => {
     .sort((a, b) => (a.watts > b.watts ? -1 : b.watts < a.watts ? 1 : 0))
     .slice(0, 5);
 
-  let arr = [];
-  for (let key in maxDevices) {
-    arr.push([maxDevices[key].name, maxDevices[key].watts]);
-  }
-
-  const data = [["Device", "Hours used"], ...arr];
+  const data = [["Device", "Hours used"], ...maxDevices];
   return (
     <>
       {activities && activities.length ? (
@@ -59,8 +51,8 @@ export const ConsumptionChart = () => {
           options={{
             title: "Most Used Devices",
           }}
-          width={"650px"}
-          height={"650px"}
+          width="500px"
+          height="400px"
         />
       ) : (
         <Message variant="info">
