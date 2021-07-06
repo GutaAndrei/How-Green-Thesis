@@ -40,11 +40,10 @@ const HomeScreen = ({ history }) => {
       }
     }
   }
-  console.log("unsorted", maxDevices);
+
   maxDevices = maxDevices.sort((a, b) =>
     a[1] < b[1] ? -1 : b[1] > a[1] ? 1 : 0
   );
-  console.log("sorted", maxDevices);
   const data = [["Device", "Hours used"], ...maxDevices];
   return (
     <>
@@ -56,7 +55,7 @@ const HomeScreen = ({ history }) => {
             <ConsumptionChart devices={data} />
           </Col>
           <Col>
-            <h2>Top 5 devices from activities</h2>
+            <h2>Top devices from activities</h2>
             <ListGroup>
               {maxDevices.reverse().map((device) => (
                 <ListGroup.Item key={device}>
