@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Row, Col, ListGroup } from "react-bootstrap";
+
 import Message from "../components/Message";
-import { Row, Col, Card, ListGroup } from "react-bootstrap";
 import ConsumptionChart from "../components/ConsumptionChart";
 
 let maxDevices = [];
@@ -23,21 +24,28 @@ const HomeScreen = ({ history }) => {
     for (let i = 0; i < activities.length; i++) {
       let activityDevices = activities[i].devices;
       for (let j = 0; j < activityDevices.length; j++) {
-        if (maxDevices[activityDevices[j].name]) {
-          maxDevices[activityDevices[j].watts] += activityDevices[j].watts;
+        const device = [activityDevices[j].name, activityDevices[j].watts];
+        if (maxDevices.some((item) => item[0] === device[0])) {
+          const existingDevice =
+            maxDevices[maxDevices.findIndex((item) => item[0] === device[0])];
+          maxDevices = maxDevices.slice(
+            maxDevices.findIndex((item) => item[0] === device[0])
+          );
+          const w1 = existingDevice[1];
+          const w2 = device[1];
+          maxDevices.push([existingDevice[0], w1 + w2]);
         } else {
-          maxDevices.push([activityDevices[j].name, activityDevices[j].watts]);
+          maxDevices.push(device);
         }
       }
     }
   }
-
-  maxDevices
-    .sort((a, b) => (a.watts < b.watts ? -1 : b.watts > a.watts ? 1 : 0))
-    .slice(0, 5);
-
+  console.log("unsorted", maxDevices);
+  maxDevices = maxDevices.sort((a, b) =>
+    a[1] < b[1] ? -1 : b[1] > a[1] ? 1 : 0
+  );
+  console.log("sorted", maxDevices);
   const data = [["Device", "Hours used"], ...maxDevices];
-
   return (
     <>
       {error ? (
@@ -45,14 +53,14 @@ const HomeScreen = ({ history }) => {
       ) : (
         <Row>
           <Col>
-            <ConsumptionChart />
+            <ConsumptionChart devices={data} />
           </Col>
           <Col>
             <h2>Top 5 devices from activities</h2>
             <ListGroup>
               {maxDevices.reverse().map((device) => (
                 <ListGroup.Item key={device}>
-                  {device[0] + " - " + device[1] + "W"}
+                  {device[0] + " - " + device[1] + " W"}
                 </ListGroup.Item>
               ))}
             </ListGroup>
