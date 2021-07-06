@@ -24,7 +24,7 @@ const HomeScreen = ({ history }) => {
     for (let i = 0; i < activities.length; i++) {
       let activityDevices = activities[i].devices;
       for (let j = 0; j < activityDevices.length; j++) {
-        const device = [activityDevices[j].name, activityDevices[j].watts];
+        const device = [activityDevices[j].name, activityDevices[j].hours];
         if (maxDevices.some((item) => item[0] === device[0])) {
           const existingDevice =
             maxDevices[maxDevices.findIndex((item) => item[0] === device[0])];
@@ -60,7 +60,7 @@ const HomeScreen = ({ history }) => {
             <ListGroup>
               {maxDevices.reverse().map((device) => (
                 <ListGroup.Item key={device}>
-                  {device[0] + " - " + device[1] + " W"}
+                  {device[0] + " - " + device[1] + " H"}
                 </ListGroup.Item>
               ))}
             </ListGroup>
