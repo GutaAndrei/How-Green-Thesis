@@ -15,7 +15,6 @@ export const ConsumptionChart = (data) => {
   useEffect(() => {
     dispatch(listActivities());
   }, [dispatch]);
-  console.log(data.devices.length);
   return (
     <>
       {data.devices.length === 1 ? (
