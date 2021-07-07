@@ -40,36 +40,41 @@ const DeviceAddScreen = ({ history }) => {
   return (
     <FormContainer>
       <h1>Add devices for today</h1>
-      {loading && <Loader />}
-      {error && <Message variant="danger">{error}</Message>}
-      {activityAddError && (
-        <Message variant="danger">{activityAddError}</Message>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : devices.length ? (
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId="devices">
+            <Form.Label>Select Devices</Form.Label>
+            {devices &&
+              devices.map((device) => (
+                <Form.Check
+                  label={`${device.name}, ${device.watts} W, ${device.hours} H`}
+                  onChange={(e) =>
+                    setDevicesArray([
+                      ...devicesArray,
+                      {
+                        name: device.name,
+                        watts: device.watts,
+                        hours: device.hours,
+                        device: device._id,
+                      },
+                    ])
+                  }
+                ></Form.Check>
+              ))}
+          </Form.Group>
+          <Button type="submit" variant="primary">
+            Submit
+          </Button>
+        </Form>
+      ) : (
+        <Message variant="info">
+          You have no registered devices in your account
+        </Message>
       )}
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="devices">
-          <Form.Label>Select Devices</Form.Label>
-          {devices &&
-            devices.map((device) => (
-              <Form.Check
-                label={`${device.name}, ${device.watts} W, ${device.hours} H`}
-                onChange={(e) =>
-                  setDevicesArray([
-                    ...devicesArray,
-                    {
-                      name: device.name,
-                      watts: device.watts,
-                      hours: device.hours,
-                      device: device._id,
-                    },
-                  ])
-                }
-              ></Form.Check>
-            ))}
-        </Form.Group>
-        <Button type="submit" variant="primary">
-          Submit
-        </Button>
-      </Form>
     </FormContainer>
   );
 };
