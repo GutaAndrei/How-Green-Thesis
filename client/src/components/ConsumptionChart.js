@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { useDispatch, useSelector } from "react-redux";
+
+import Message from "./Message";
+
 import { listActivities } from "../actions/activityActions";
 
 export const ConsumptionChart = (data) => {
@@ -12,18 +15,23 @@ export const ConsumptionChart = (data) => {
   useEffect(() => {
     dispatch(listActivities());
   }, [dispatch]);
+  console.log(data.devices.length);
   return (
     <>
-      <Chart
-        chartType="PieChart"
-        loader={<div>Loading Chart</div>}
-        data={data.devices}
-        options={{
-          title: "Most Used Devices",
-        }}
-        width="500px"
-        height="400px"
-      />
+      {data.devices.length === 1 ? (
+        <Message variant="info">No activity data</Message>
+      ) : (
+        <Chart
+          chartType="PieChart"
+          loader={<div>Loading Chart</div>}
+          data={data.devices}
+          options={{
+            title: "Most Used Devices",
+          }}
+          width="500px"
+          height="400px"
+        />
+      )}
     </>
   );
 };
