@@ -38,10 +38,14 @@ const ProfileScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
+    if (password.length < 6) {
+      setMessage("Password needs at least 6 characters");
     } else {
-      dispatch(updateUser({ id: user._id, name, email, password }));
+      if (password !== confirmPassword) {
+        setMessage("Passwords do not match");
+      } else {
+        dispatch(updateUser({ id: user._id, name, email, password }));
+      }
     }
   };
 
@@ -49,9 +53,15 @@ const ProfileScreen = ({ location, history }) => {
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
-        {message && <Message variant="danger">{message}</Message>}
-        {error && <Message variant="danger">{error}</Message>}
-        {success && <Message variant="success">Profile Updated</Message>}
+        {success ? (
+          <Message variant="success">Profile Updated</Message>
+        ) : message ? (
+          message && <Message variant="danger">{message}</Message>
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <></>
+        )}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">

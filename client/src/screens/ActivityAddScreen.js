@@ -66,9 +66,13 @@ const DeviceAddScreen = ({ history }) => {
                 ></Form.Check>
               ))}
           </Form.Group>
-          <Button type="submit" variant="primary">
-            Submit
-          </Button>
+          {devicesArray.length ? (
+            <Button type="submit" variant="primary">
+              Submit
+            </Button>
+          ) : (
+            <Message variant="info">You have no devices selected</Message>
+          )}
         </Form>
       ) : (
         <Message variant="info">
