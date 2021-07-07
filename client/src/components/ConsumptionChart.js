@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { useDispatch, useSelector } from "react-redux";
-
-import Message from "./Message";
 import { listActivities } from "../actions/activityActions";
 
 export const ConsumptionChart = (data) => {

@@ -25,25 +25,20 @@ const HomeScreen = ({ history }) => {
       let activityDevices = activities[i].devices;
       for (let j = 0; j < activityDevices.length; j++) {
         const device = [activityDevices[j].name, activityDevices[j].hours];
-        if (maxDevices.some((item) => item[0] === device[0])) {
-          const existingDevice =
-            maxDevices[maxDevices.findIndex((item) => item[0] === device[0])];
-          maxDevices = maxDevices.slice(
-            maxDevices.findIndex((item) => item[0] === device[0])
-          );
-          const w1 = existingDevice[1];
-          const w2 = device[1];
-          maxDevices.push([existingDevice[0], w1 + w2]);
-        } else {
+        if (!maxDevices.some((item) => item[0] === device[0])) {
           maxDevices.push(device);
+        } else {
+          const index = maxDevices.findIndex((item) => item[0] === device[0]);
+          maxDevices[index][1] += device[1];
         }
       }
     }
   }
-
+  maxDevices = maxDevices.slice(0, 5);
   maxDevices = maxDevices.sort((a, b) =>
     a[1] < b[1] ? -1 : b[1] > a[1] ? 1 : 0
   );
+
   const data = [["Device", "Hours used"], ...maxDevices];
   return (
     <>
@@ -55,7 +50,7 @@ const HomeScreen = ({ history }) => {
             <ConsumptionChart devices={data} />
           </Col>
           <Col>
-            <h2>Top devices from activities</h2>
+            <h2>Top 5 devices from activities</h2>
             <ListGroup>
               {maxDevices.reverse().map((device) => (
                 <ListGroup.Item key={device}>
